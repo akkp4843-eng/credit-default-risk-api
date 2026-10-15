@@ -1,10 +1,8 @@
 
 from fastapi.testclient import TestClient
 from main import app
-import joblib
 
 client = TestClient(app)
-model = joblib.load("model.joblib")
 
 def test_home():
     response = client.get("/")
@@ -12,9 +10,7 @@ def test_home():
     assert response.json()["model"] == "RandomForestClassifier"
 
 def test_prediction():
-    # Model ke expected 23 features ke liye valid test input
     features = [0.0] * 23
-
     response = client.post(
         "/predict",
         json={"features": features}
