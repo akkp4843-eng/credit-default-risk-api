@@ -61,3 +61,13 @@ This is an educational prototype, not a validated credit-scoring system. Do not 
 ## Note
 
 The free hosting service may take around a minute to respond after a period of inactivity. This project is an educational prototype and should not be used for real lending decisions.
+
+
+## System Architecture
+
+1. Client sends a JSON request to the FastAPI `/predict` endpoint.
+2. Pydantic validates the 23 numeric input features.
+3. The API uses the trained Random Forest model to make a prediction.
+4. The API returns the prediction and default probability as JSON.
+
+**Technology Stack:** Python, FastAPI, Scikit-learn, Joblib, Docker, pytest, GitHub Actions and Render.
