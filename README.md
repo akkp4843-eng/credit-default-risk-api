@@ -49,3 +49,15 @@ docker run -p 8000:8000 credit-default-api
 ## Limitations
 
 This is an educational prototype, not a validated credit-scoring system. Do not use its predictions for real lending decisions.
+
+
+
+## Live Demo
+
+- **API Base URL:** https://credit-default-risk-api.onrender.com
+- **Interactive API Documentation:** https://credit-default-risk-api.onrender.com/docs
+- **Prediction Endpoint:** `POST /predict`
+
+## Note
+
+The free hosting service may take around a minute to respond after a period of inactivity. This project is an educational prototype and should not be used for real lending decisions.
