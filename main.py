@@ -1,5 +1,8 @@
 
+import gzip
 import joblib
+import os
+import tempfile
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
@@ -10,8 +13,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Load the trained model
-model = joblib.load("model.joblib")
+MODEL_PATH = "model.joblib.gz"
+
+if not os.path.exists(MODEL_PATH):
+    raise FileNotFoundError(f"Model file not found: {MODEL_PATH}")
+
+# Decompress the uploaded model into a temporary file and load it.
+with gzip.open(MODEL_PATH, "rb") as compressed:
+    with tempfile.NamedTemporaryFile(suffix=".joblib") as temp:
+        temp.write(compressed.read())
+        temp.flush()
+        model = joblib.load(temp.name)
+
 feature_names = list(model.feature_names_in_)
 
 class ModelInput(BaseModel):
